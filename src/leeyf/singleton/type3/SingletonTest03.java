@@ -1,9 +1,6 @@
-package leeyf.singleton.type1;
+package leeyf.singleton.type3;
 
-/**
- * 设计模式-单例模式
- */
-public class SingletonTest01 {
+public class SingletonTest03 {
     public static void main(String[] args) {
         Singleton instance1 = Singleton.getInstance();
         Singleton instance2 = Singleton.getInstance();
@@ -11,21 +8,19 @@ public class SingletonTest01 {
         System.out.println(instance1.hashCode());
         System.out.println(instance2.hashCode());
     }
-
 }
-
- //饿汉式实现(静态遍历)
+//懒汉式(线程不安全)
 class Singleton{
-    //1.构造器私有化，外部不能new
-    private Singleton(){}
+    private static Singleton instance;
 
-    //奔雷内部创建对象实例
-    private final static Singleton instance = new Singleton();
+    private Singleton(){};
 
-    //提供一个公有的静态方法，返回实例对象
+    //提供一个静态的额公有方法，当使用到该方法时，才去创建instance
+    //懒汉式
     public static Singleton getInstance(){
+        if(instance==null){
+            instance = new Singleton();
+        }
         return instance;
     }
 }
-
-
